@@ -3,32 +3,27 @@ public class RunDLL {
 		PPDLL list = new PPDLL();
 
 		list.insert(2,1);
-		list.insert(7,2);
-		list.insert(3,3);
+		list.insert(5,2);
+		list.insert(6,2);
+		list.insert(42,1);
 
 
-		//System.out.println(list.search(1, 2));
-
-		list.printlist();
-		list.printreverse();
-
+		list.nextVersion();
 		list.insert(4,2);
 
-		list.printlist();
-		list.printreverse();
-
-		list.insert(22,1);
-
-		list.printlist();
-		list.printreverse();
-
-		System.out.println(list.search(1, 22));
-
-		list.update(44, 2);
+		list.nextVersion();
+		list.insert(7,3);
+		list.insert(32,6);
 
 		list.printlist();
 		list.printreverse();
+
+		System.out.println(list.search(4,3));
+
+		System.out.println(list.search(1,2));
+
 
 	}
+
 
 }
