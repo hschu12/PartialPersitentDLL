@@ -4,7 +4,6 @@ public class PPDLL{
 
 	Node first;
 	int version = 1;
-	int size = 0;
 	ArrayList<Node> header;
 
 	public PPDLL() {
@@ -55,20 +54,15 @@ public class PPDLL{
 
 		else {
 			if ( i == 1 ) {
-				first = newNode;
 				header.set(version-1, newNode);
 				newNode.next[0] = currentNode;
 				newNode.nextVersions[0] = currentNode.versionNumber;
-				int prevNodeIndex = newNode.next[0].getPrevAllowedPointerIndex(version); //get index of prev pointer to same version
+				int prevNodeIndex = currentNode.getPrevAllowedPointerIndex(version); //get index of prev pointer to same version
 				if (prevNodeIndex != -1) {
-					newNode.next[0].prev[prevNodeIndex] = newNode;
-					newNode.next[0].prevVersions[prevNodeIndex] = version;
+					currentNode.prev[prevNodeIndex] = newNode;
+					currentNode.prevVersions[prevNodeIndex] = version;
 				}
-				else{
-					System.out.println("copying");
-					//COPY af next pga af prev pointers overload
-				}
-				size++;
+				first = newNode;
 				return true;
 			}
 
@@ -121,10 +115,6 @@ public class PPDLL{
 	/* updates the key at i to new key in the newest version*/
 	public boolean update(int key, int i) {
 		Node currentNode = first;
-		if( i > size ) {
-			System.out.println("No element at index: " + i);
-			return false;
-		}
 		for (int j = 1; j < i ; j++) {
 			currentNode = currentNode.getNext(version);
 		}
@@ -149,7 +139,7 @@ public class PPDLL{
 		System.out.println("prev");
 		for (int j = 1; j <= version ; j++) {	
 			System.out.println("version: " + j);
-			Node current = header.get(version-1);
+			Node current = header.get(j-1);
 			while (current.getNext(j) != null) {
 					current = current.getNext(j);
 				}
